@@ -13,6 +13,7 @@ public class ProductFieldSetMapper implements FieldSetMapper<Product> {
         product.setName(fieldSet.readString("NAME"));
         product.setDescription(fieldSet.readString("DESCRIPTION"));
         product.setPrice(fieldSet.readBigDecimal("PRICE"));
+        product.setAction(fieldSet.readString("ACTION"));
         return product;
     }
 }

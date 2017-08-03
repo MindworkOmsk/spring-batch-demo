@@ -39,7 +39,7 @@ public class ImportProductsJob {
     private ItemReader<Product> reader;
 
     @Autowired
-    @Qualifier("productWriter")
+    @Qualifier("itemsWriter")
     private ItemWriter<ProductZ> writer;
 
 

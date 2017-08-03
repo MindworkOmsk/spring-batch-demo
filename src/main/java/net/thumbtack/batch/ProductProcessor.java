@@ -15,6 +15,7 @@ public class ProductProcessor implements ItemProcessor<Product, ProductZ> {
                 product.getId(),
                 product.getName() + " was updated",
                 product.getDescription(),
-                product.getPrice());
+                product.getPrice(),
+                product.getAction());
     }
 }

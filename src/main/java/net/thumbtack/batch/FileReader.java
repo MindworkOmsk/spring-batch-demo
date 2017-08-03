@@ -17,7 +17,7 @@ public class FileReader {
     @Bean
     private DefaultLineMapper lineMapper() {
         final DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
-        delimitedLineTokenizer.setNames(new String[]{"PRODUCT_ID", "NAME", "DESCRIPTION", "PRICE"});
+        delimitedLineTokenizer.setNames(new String[]{"PRODUCT_ID", "NAME", "DESCRIPTION", "PRICE", "ACTION"});
 
         return new DefaultLineMapper<Product>() {{
             setLineTokenizer(delimitedLineTokenizer);
