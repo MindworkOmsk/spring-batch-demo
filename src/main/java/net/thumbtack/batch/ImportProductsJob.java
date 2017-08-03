@@ -2,6 +2,7 @@ package net.thumbtack.batch;
 
 
 import net.thumbtack.model.Product;
+import net.thumbtack.model.ProductZ;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -9,6 +10,7 @@ import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +32,24 @@ public class ImportProductsJob {
     private SimpleJobLauncher jobLauncher;
 
     @Autowired
+    private ItemProcessor<Product, ProductZ> productProcessor;
+
+    @Autowired
     @Qualifier("itemsReader")
     private ItemReader<Product> reader;
 
     @Autowired
     @Qualifier("productWriter")
-    private ItemWriter<Product> writer;
+    private ItemWriter<ProductZ> writer;
 
 
     //job definition
     @Bean
     private Job superJob() {
         Step superStep = stepBuilderFactory.get("superStep")
-                .<Product, Product>chunk(10) //same because without transformation
+                .<Product, ProductZ>chunk(10) //same because without transformation
                 .reader(reader)
+                .processor(productProcessor)
                 .writer(writer)
                 .build();
 
