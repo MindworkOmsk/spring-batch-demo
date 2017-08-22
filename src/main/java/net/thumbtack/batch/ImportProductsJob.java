@@ -47,7 +47,7 @@ public class ImportProductsJob {
     @Bean
     private Job superJob() {
         Step superStep = stepBuilderFactory.get("superStep")
-                .<Product, ProductZ>chunk(10) //same because without transformation
+                .<Product, ProductZ>chunk(10)
                 .reader(reader)
                 .processor(productProcessor)
                 .writer(writer)
